@@ -27,6 +27,6 @@
     "homedir": "^0.6.0",
     "http-proxy-agent": "^1.0.0",
     "https-proxy-agent": "^1.0.0",
-    "node-fetch": "^1.5.2"
+    "node-fetch": "^1.5.3"
   }
 }
