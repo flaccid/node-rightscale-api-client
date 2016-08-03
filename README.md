@@ -98,18 +98,19 @@ With subsequent `GET` calls:
 var RsApiClient = require('./lib/rs_api_client');
 var rsc = new RsApiClient();
 
-rsc.getConfig(env).then((cfg)=>{
+rsc.getConfig('env').then((cfg)=>{
   let account = JSON.parse(cfg).accounts[0];
   return rsc.login(account.host, account.refresh_token)
 }).then((token)=>{
-  return rsc.get('/api/clouds');
-}).then((clouds)=>{
-  console.log(clouds)
-  return rsc.get("/api/identity_providers");
-}).then(function(identityProviders){
-  console.log(identityProviders);
+  return rsc.get('/api/identity_providers');
+}).then((identityProviders)=>{
+  console.log(identityProviders)
+  let cloud = encodeURI('EC2 us-east-1');
+  return rsc.get('/api/clouds?filter[]=name=='+cloud);
+}).then(function(clouds){
+  console.log(JSON.stringify(JSON.parse(clouds), true, 4));
 }).catch(function(err){
-  console.log("Error: "+err);
+  console.log("Error: " + err);
 });
 ```
 
